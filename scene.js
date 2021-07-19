@@ -11,26 +11,43 @@ document.body.appendChild( renderer.domElement );
 // CAMERA 
 
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 150 );
-camera.position.set( 0, 0, 20 );
-camera.lookAt( 0, 0, 0 );
+camera.position.set( 0, 0, 50 );
+camera.lookAt( 0, 10, 0 );
 
+// MESHES : VECTOR
 
-const material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+const material = new THREE.LineDashedMaterial( { color: 0x00f0ff, linewidth:1 } );
 
 const points = [];
 points.push( new THREE.Vector3( - 10, 0, 0 ) );
 points.push( new THREE.Vector3( 0, 20, 0 ) );
 points.push( new THREE.Vector3( 10, 0, 0 ) );
 points.push( new THREE.Vector3( 10, 10, 10 ) );
-points.push( new THREE.Vector3( 20, 10, 10 ) );
+points.push( new THREE.Vector3( 0, 10, 10 ) );
 points.push( new THREE.Vector3( -10, 0, 0 ) );
-
+points.push( new THREE.Vector3( - 10, 10, 0 ) );
+points.push( new THREE.Vector3( 0, 20, 20 ) );
+points.push( new THREE.Vector3( 10, -10, 0 ) );
+points.push( new THREE.Vector3( 10, 10, 10 ) );
+points.push( new THREE.Vector3( 10, 30, 10 ) );
+points.push( new THREE.Vector3( -10, 0, 10 ) );
+points.push( new THREE.Vector3( -10, 0, 0 ) );
 
 const geometry = new THREE.BufferGeometry().setFromPoints( points );
 
 const line = new THREE.Line( geometry, material );
 
-scene.add( line );
+// MESHES: PLANE
+ 
+
+
+
+// LIGHT
+
+const light = new THREE.HemisphereLight( 0xffffbb, 0x080820, 1 );
+
+
+scene.add( line, light );
 renderer.render( scene, camera );
 
 function animate(){
@@ -40,4 +57,4 @@ function animate(){
 	renderer.render(scene, camera); 
 }
 
-animate()
+ animate()
